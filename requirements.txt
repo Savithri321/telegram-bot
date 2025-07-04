@@ -1,4 +1,4 @@
-python-telegram-bot==13.15
-python-dotenv
-pandas
 requests
+pandas
+python-telegram-bot
+python-dotenv
