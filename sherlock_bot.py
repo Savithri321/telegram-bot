@@ -1,9 +1,6 @@
-import threading
 import requests
 import pandas as pd
 from dotenv import load_dotenv
-from flask import Flask
-from telegram.ext import Updater, CommandHandler
 import os
 import time
 df = pd.read_csv("QandA.csv",encoding='cp1252')
@@ -98,30 +95,10 @@ def get_pyqs(subject,message):
     for sub in pyq_links[subject]:
       id_field= sub
       send_pdf(id_field,message)
-        
-def run_bot():
-    offset = 0
-    while True:
-        offset = read_msg(offset)
-        time.sleep(1)
- 
-def run_web():
-    app = Flask(__name__)
 
-    @app.route('/')
-    def home():
-        return "Bot is running"
 
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
-if __name__ == "__main__":
-    # Thread 1: Telegram bot
-    t1 = threading.Thread(target=run_bot)
-    # Thread 2: Dummy web server
-    t2 = threading.Thread(target=run_web)
-    
-    t1.start()
-    t2.start()
-    
-    t1.join()
-    t2.join()
+offset=0
+while True:
+  offset=read_msg(offset)
+  time.sleep(1)
+
